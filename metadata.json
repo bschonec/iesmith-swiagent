@@ -4,7 +4,7 @@
   "author": "iesmith",
   "license": "CC-BY-4.0",
   "summary": "Control and deploy the Solarwinds Linux agent",
-  "project_page": "https://forge.puppet.com/iesmith/swiagent",
+  "project_page": "https://github.com/iesmith2/iesmith-swiagent",
   "source": "https://github.com/iesmith2/iesmith-swiagent",
   "issues_url": "https://github.com/iesmith2/iesmith-swiagent/issues",
   "tags": [
