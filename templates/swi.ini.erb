@@ -1,35 +1,15 @@
-1
-<%- if @agentpush -%>
-1
-<%- else -%>
-0
-3
-<%= @agentsecret %>
-5
-<%- end -%>
-2
-<%= @targethost %>
-3
-<%= @targetport %>
-4
-<%= @targetuser %>
-5
-<%= @targetpwhash %>
-<%- if @proxyhost -%>
-6
-1
-3
-2
-<%= @proxyhost %>
-3
-<%= @proxyport %>
-<%- if @proxyuser -%>
-4
-<%= @proxyuser %>
-5
-<%= @proxypwhash %>
-<%- end -%>
-6
-<%- end -%>
-7
-
+[parameters]
+installcert=<%= @installcert %>
+run_provision=<%= @run_provision %>
+relative_path=<%= @relative_path %>
+ca_cert=<%= @ca_cert %>
+cert=<%= @cert %>
+ca_pwd=<%= @ca_pwd %>
+target=<%= @target %>
+port=<%= @port %>
+ipaddress=<%= @ipaddress.join(',') %>
+targetDeviceID=<%= @targetdeviceid %>
+is_active=<%= @is_active %>
+server_http_port=<%= @server_http_port %>
+proxy_access_type=<%= @proxy_access_type %>
+proxy_password=<%= @proxy_password %>
