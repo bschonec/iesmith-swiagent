@@ -9,11 +9,6 @@ if File.exist?(cfgfile)
   require 'rubygems'
   require 'facter'
 
-  begin
-    require 'nokogiri'
-  rescue Exception => ex
-    Puppet.warning "Nokogiri is required for the swiagent module to function: " + ex.message
-  end
 
   # Parse XML file, and step over the configuration elements...
   facts = Hash.new
