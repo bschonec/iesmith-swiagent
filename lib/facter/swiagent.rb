@@ -18,17 +18,13 @@ if File.exist?(cfgfile)
   # Parse XML file, and step over the configuration elements...
   facts = Hash.new
   begin
-    xml = File.open(cfgfile) { |f| Nokogiri::XML(f) }
-    xml.xpath('//certificate/*|//executer/*|//target/*|//httpproxy/*').each do |node|
-      # Create a new hash for this element, if we haven't already...
-      if not facts.key?(node.parent.name)
-        facts[node.parent.name] = Hash.new
-      end
-
-      # Store the fact under a hash key identical to the name of the XML
-      # element...
-      facts[node.parent.name][node.name] = node.content
+    xml = File.open(cfgfile) { |f| Document.new(f) }
+    XPath.each(xml, '//certificate/*|//executer/*|//target/*|//httpproxy/*') do |node|
+      parent = node.parent.name
+      facts[parent] ||= {}
+      facts[parent][node.name] = node.text
     end
+
   rescue Exception => ex
     Puppet.warning "Unable to parse " + cfgfile + ": " + ex.message
   end
