@@ -3,17 +3,19 @@
 # Custom fact script for Facter, intended to export swiagent configuration
 # variables to Puppet...
 
+require 'rubygems'
+require 'facter'
+require 'rexml/document'
+include REXML
+
 cfgfile = '/opt/SolarWinds/Agent/bin/swiagent.cfg'
 
 if File.exist?(cfgfile)
-  require 'rubygems'
-  require 'facter'
+  facts = {}
 
-
-  # Parse XML file, and step over the configuration elements...
-  facts = Hash.new
   begin
     xml = File.open(cfgfile) { |f| Document.new(f) }
+
     XPath.each(xml, '//certificate/*|//executer/*|//target/*|//httpproxy/*') do |node|
       parent = node.parent.name
       facts[parent] ||= {}
@@ -21,13 +23,10 @@ if File.exist?(cfgfile)
     end
 
   rescue Exception => ex
-    Puppet.warning "Unable to parse " + cfgfile + ": " + ex.message
+    Facter.warn("Unable to parse #{cfgfile}: #{ex.message}")
   end
 
-  # Export discovered facts into Facter...
   Facter.add(:swiagent) do
-    setcode do
-      facts
-    end
+    setcode { facts }
   end
 end
