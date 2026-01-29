@@ -7,7 +7,7 @@ class swiagent::params {
   case $facts['os']['family'] {
     'RedHat': {
       # Assign package names...
-      $managepkgs = $_managepkgs
+      $managepkgs = true
 
       # Assign basic binary paths...
       $testpath = '/usr/bin/test'
